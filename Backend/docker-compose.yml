@@ -1,0 +1,30 @@
+﻿services:
+  api:
+    image: api
+    build:
+      context: .
+      dockerfile: API/Dockerfile
+
+  services-docker:
+    image: services-docker
+    build:
+      context: .
+      dockerfile: Services.Docker/Dockerfile
+
+  services-logging:
+    image: services-logging
+    build:
+      context: .
+      dockerfile: Services.Logging/Dockerfile
+
+  services-administration:
+    image: services-administration
+    build:
+      context: .
+      dockerfile: Services.Administration/Dockerfile
+      
+  services-auth:
+    image: services-auth
+    build:
+      context: .
+      dockerfile: Services.Auth/Dockerfile
