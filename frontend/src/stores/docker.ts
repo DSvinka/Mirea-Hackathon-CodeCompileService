@@ -8,6 +8,8 @@ interface DockerState {
   containers: DockerContainerModel[]
   images: DockerImageModel[]
 
+  connectionId?: string
+
   currentImageIndex?: number
   currentContainerIndex?: number;
 
@@ -20,6 +22,8 @@ export const useDockerStore = defineStore("docker", {
     containers: [],
     images: [],
 
+    connectionId: null,
+
     currentContainerIndex: null,
     currentImageIndex: null,
 
@@ -29,14 +33,34 @@ export const useDockerStore = defineStore("docker", {
   getters: {
     getContainers(state: DockerState): DockerContainerModel[]{
       return state.containers
-    }
+    },
+
+    getImages(state: DockerState): DockerImageModel[]{
+      return state.images
+    },
+
+    getConnectionId(state: DockerState): string{
+      return state.connectionId
+    },
+
+    getCurrentContainerIndex(state: DockerState): number{
+      return state.currentContainerIndex
+    },
+
+    getCurrentImageIndex(state: DockerState): number{
+      return state.currentImageIndex
+    },
+
+    getIsLoading(state: DockerState): boolean{
+      return state.isLoading
+    },
   },
 
   actions: {
     async sendGetContainers(request: GetListDockerContainerRequest) {
       try {
-        const response = await Docker.post<void | ErrorModel>("/containers", request, {headers: getAuthHeader()})
-        if (response.status !== 202) {
+        const response = await Docker.post<void | ErrorModel>("/containers/get/all/user", request, {headers: getAuthHeader()})
+        if (response.status !== 200) {
           alert((response.data as ErrorModel).message)
         } else {
           this.isLoading = true;
@@ -50,8 +74,8 @@ export const useDockerStore = defineStore("docker", {
 
     async sendGetImages(request: GetListDockerImageRequest) {
       try {
-        const response = await Docker.post<void | ErrorModel>("/images", request, {headers: getAuthHeader()})
-        if (response.status !== 202) {
+        const response = await Docker.post<void | ErrorModel>("/images/get/all", request, {headers: getAuthHeader()})
+        if (response.status !== 200) {
           alert((response.data as ErrorModel).message)
         } else {
           this.isLoading = true;
@@ -92,8 +116,25 @@ export const useDockerStore = defineStore("docker", {
     },
 
 
+    enableLoading() {
+      this.isLoading = true;
+    },
+
     disableLoading() {
       this.isLoading = false;
+    },
+
+
+    setCurrentImageIndex(imageIndex?: number) {
+      this.currentImageIndex = imageIndex;
+    },
+
+    setCurrentContainerIndex(containerIndex?: number) {
+      this.currentContainerIndex = containerIndex;
+    },
+
+    setConnectionId(connectionId: number) {
+      this.connectionId = connectionId
     }
   },
 })

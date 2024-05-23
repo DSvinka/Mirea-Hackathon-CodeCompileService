@@ -1,37 +1,50 @@
 <script setup lang="ts">
 import { VueMonacoEditor } from '@guolao/vue-monaco-editor'
 import { ref, shallowRef } from 'vue'
-
-
-let items = [
-  {
-    title: 'Python',
-    value: 1,
-  },
-  {
-    title: 'C#',
-    value: 2,
-  },
-  {
-    title: 'C++',
-    value: 3,
-  },
-];
+import {useDockerStore} from "../stores/docker"
+import {Docker, getAuthHeader} from "../api"
+import {CreateDockerContainerRequest, DeleteDockerContainerRequest} from "../api/models/docker-container-models";
 
 const MONACO_EDITOR_OPTIONS = {
   automaticLayout: true,
   formatOnType: true,
   formatOnPaste: true,
-
 }
 
+const dockerStore = useDockerStore();
+
 const code = ref('// some code...')
+const imageId = ref(null)
+
 const editorRef = shallowRef()
 const handleMount = editor => (editorRef.value = editor)
 
-// your action
-function formatCode() {
-  editorRef.value?.getAction('editor.action.formatDocument').run()
+function codeStart() {
+  const model: CreateDockerContainerRequest = {
+    connectionId: dockerStore.getConnectionId,
+    imageId: dockerStore.currentImageIndex,
+
+    programCode: code.value
+  }
+
+  dockerStore.enableLoading();
+  Docker.post("/containers/create", model, {headers: getAuthHeader()})
+    .then(res => dockerStore.disableLoading())
+}
+
+function codeStop() {
+  const model: DeleteDockerContainerRequest = {
+    connectionId: dockerStore.getConnectionId,
+    containerId: dockerStore.getCurrentContainerIndex
+  }
+
+  dockerStore.enableLoading();
+  Docker.post("/containers/delete", model, {headers: getAuthHeader()})
+    .then(res => dockerStore.disableLoading())
+}
+
+function onImageChange(event) {
+  dockerStore.setCurrentImageIndex(event.target.value)
 }
 
 </script>
@@ -50,11 +63,11 @@ function formatCode() {
         </span>
 
         <span class="mx-auto justify-center">
-          <v-btn icon disabled>
+          <v-btn icon :disabled="dockerStore.getIsLoading && dockerStore.getCurrentContainerIndex != null" @click="codeStop">
             <v-icon>mdi-stop</v-icon>
           </v-btn>
 
-          <v-btn icon disabled>
+          <v-btn icon :disabled="dockerStore.getIsLoading && !dockerStore.getCurrentContainerIndex != null" @click="codeStart">
             <v-icon>mdi-play</v-icon>
           </v-btn>
         </span>
@@ -68,7 +81,7 @@ function formatCode() {
             <v-card-title>Язык</v-card-title>
             <v-divider/>
 
-            <v-list :items="items"></v-list>
+            <v-list :disabled="dockerStore.getIsLoading && dockerStore.getCurrentContainerIndex != null" @change="onImageChange" v-model="imageId" :items="dockerStore.getImages" item-title="displayName" item-value="id"></v-list>
           </v-card>
         </v-col>
 
@@ -89,22 +102,8 @@ function formatCode() {
             <v-card style="height: 100%; width: 100%" border>
               <v-card-title>Логи</v-card-title>
               <v-divider/>
-              <div class="ma-2" style="max-height: 100%; overflow-y: scroll">
-                LOGS <br/>
-                LOGS <br/>
-                LOGS <br/>
-                LOGS <br/>
-                LOGS <br/>
-                LOGS <br/>
-                LOGS <br/>
-                LOGS <br/>
-                LOGS <br/>
-                LOGS <br/>
-                LOGS <br/>
-                LOGS <br/>
-                LOGS <br/>
-                LOGS <br/>
-                LOGS <br/>
+              <div v-if="dockerStore.getCurrentContainerIndex" class="ma-2" style="max-height: 100%; overflow-y: scroll">
+                {{dockerStore.getContainers[dockerStore.getCurrentContainerIndex].logs}}
               </div>
             </v-card>
           </v-row>

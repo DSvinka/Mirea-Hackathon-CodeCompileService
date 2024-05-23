@@ -74,7 +74,7 @@ public class DockerContainerController: ControllerBase
     /// <param name="request">Запрос</param>
     /// <returns></returns>
     [Authorize]
-    [HttpDelete("delete")]
+    [HttpPost("delete")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     public async Task<IActionResult> Delete([FromBody] DockerContainerDeleteRequest request)

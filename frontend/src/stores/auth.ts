@@ -10,6 +10,7 @@ import {
   setAccessToken,
   setRefreshToken
 } from "../api"
+import {ErrorModel} from "../api/models/error-models";
 
 interface AuthState {
   profile: UserProfileModel
@@ -43,7 +44,7 @@ export const useAuthStore = defineStore("auth", {
     async verify() {
       try {
         const response = await Auth.get<UserVerifyModel | ErrorModel>("/verify", {headers: getAuthHeader()})
-        if (response.status === 202) {
+        if (response.status === 200) {
           const data = (response.data as UserVerifyModel);
           this.isLoggedIn = data.isAuthorized
 
@@ -66,12 +67,10 @@ export const useAuthStore = defineStore("auth", {
     async login(model: UserLoginRequest) {
       try {
         const response = await Auth.post<UserAuthModel | ErrorModel>("/login", model)
-        if (response.status === 202) {
+        if (response.status === 200) {
           const data = (response.data as UserAuthModel);
           setAccessToken(data.accessToken)
           setRefreshToken(data.refreshToken)
-
-          alert("Теперь авторизируйтесь!")
         } else {
           alert((response.data as ErrorModel).message)
         }
@@ -85,7 +84,7 @@ export const useAuthStore = defineStore("auth", {
     async register(model: UserLoginRequest) {
       try {
         const response = await Auth.post<void | ErrorModel>("/register", model)
-        if (response.status === 202) {
+        if (response.status === 200) {
           alert("Теперь авторизируйтесь!")
         } else {
           alert((response.data as ErrorModel).message)

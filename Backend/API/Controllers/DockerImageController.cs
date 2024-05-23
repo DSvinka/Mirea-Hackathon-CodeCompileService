@@ -78,7 +78,7 @@ public class DockerImageController: ControllerBase
     /// <param name="request">Запрос</param>
     /// <returns></returns>
     [Authorize]
-    [HttpDelete("remove")]
+    [HttpPost("remove")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
