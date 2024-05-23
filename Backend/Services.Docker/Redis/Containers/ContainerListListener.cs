@@ -55,7 +55,7 @@ public class ContainerListListener: BackgroundService
         if (request == null)
         {
             await publisher.PublishAsync(
-                DockerRedisChannels.ContainerListChannelResponse, 
+                DockerRedisChannels.ContainerErrorChannelResponse, 
                 ErrorResponseGenerator.GetIncorrectRequestResponse(ListenerName), 
                 CommandFlags.FireAndForget
             );
@@ -74,18 +74,22 @@ public class ContainerListListener: BackgroundService
         containerResponses.AddRange(
             dbContainers.Select(container => new ContainerResponse
             {
+                Id = container.Id,
                 ConnectionId = request.ConnectionId,
-                
+
                 UserId = container.UserId,
                 ContainerId = container.ContainerId,
-                
+
                 Status = container.Status,
                 Logs = container.Logs,
                 
+                ProgramCode = container.ProgramCode,
+                ProgramCodeFolder = container.ProgramCodeFolder,
+
                 // TODO: Нужен фоновый процесс который будет отслеживать эти параметры (ну и логи со статусом тоже)
-                Memory = container.UsageMemory,
-                CpuShares = container.UsageCpuShares,
-                Storage = container.UsageStorage
+                UsageMemory = container.UsageMemory,
+                UsageCpu = container.UsageCpu,
+                UsageStorage = container.UsageStorage
             })
         );
 

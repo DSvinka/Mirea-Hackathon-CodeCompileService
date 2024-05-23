@@ -9,8 +9,9 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.5" />
         <PackageReference Include="StackExchange.Redis" Version="2.7.33" />
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
     </ItemGroup>
 
     <ItemGroup>
@@ -20,6 +21,8 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\API.Auth\API.Auth.csproj" />
+      <ProjectReference Include="..\API.Database\API.Database.csproj" />
       <ProjectReference Include="..\API.Shared\API.Shared.csproj" />
       <ProjectReference Include="..\Shared.Utils\Shared.Utils.csproj" />
     </ItemGroup>

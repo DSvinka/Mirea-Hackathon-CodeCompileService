@@ -1,5 +1,6 @@
 ﻿namespace Services.Docker.Shared.Messages.Requests.Images;
 
+[Serializable]
 public class ImageAddRequest
 {
     public required string ConnectionId;
@@ -19,12 +20,12 @@ public class ImageAddRequest
     /// <summary>
     /// In Megabytes
     /// </summary>
-    public required int Memory;
+    public required int MaxMemory;
     
     /// <summary>
     /// For example 512 is 1/2 of CPU Core
     /// </summary>
-    public required int CpuShares;
+    public required int MaxCpuShares;
 
     /// <summary>
     /// In Megabytes

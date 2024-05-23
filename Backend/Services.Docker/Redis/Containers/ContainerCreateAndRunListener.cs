@@ -1,8 +1,10 @@
 ﻿using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
 using Services.Docker.Database;
+using Services.Docker.Database.Models;
 using Services.Docker.Services;
 using Services.Docker.Shared;
+using Services.Docker.Shared.Enums;
 using Services.Docker.Shared.Messages.Requests.Containers;
 using Services.Docker.Shared.Messages.Responses.Containers;
 using Services.Docker.Utils;
@@ -54,7 +56,7 @@ public class ContainerCreateAndRunListener: BackgroundService
         if (request == null)
         {
             await publisher.PublishAsync(
-                DockerRedisChannels.ContainerCreateAndRunChannelResponse, 
+                DockerRedisChannels.ContainerErrorChannelResponse, 
                 ErrorResponseGenerator.GetIncorrectRequestResponse(ListenerName), 
                 CommandFlags.FireAndForget
             );
@@ -66,7 +68,7 @@ public class ContainerCreateAndRunListener: BackgroundService
         if (image == null)
         {
             await publisher.PublishAsync(
-                DockerRedisChannels.ContainerCreateAndRunChannelResponse,
+                DockerRedisChannels.ContainerErrorChannelResponse,
                 ErrorResponseGenerator.GetImageNotFoundResponse(request.ConnectionId, ListenerName),
                 CommandFlags.FireAndForget
             );
@@ -74,11 +76,11 @@ public class ContainerCreateAndRunListener: BackgroundService
             return;
         }
         
-        var containers = await _dockerContainerService.ContainerListByUserAsync(request.UserId);
+        var containers = await _dockerContainerService.ContainerListByUserAsync(request.UserId.ToString());
         if (containers != null && containers.Count >= image.MaxCountByUser && image.MaxCountByUser != -1)
         {
             await publisher.PublishAsync(
-                DockerRedisChannels.ContainerCreateAndRunChannelResponse,
+                DockerRedisChannels.ContainerErrorChannelResponse,
                 ErrorResponseGenerator.GetToManyUserContainersResponse(request.ConnectionId, ListenerName),
                 CommandFlags.FireAndForget
             );
@@ -90,15 +92,30 @@ public class ContainerCreateAndRunListener: BackgroundService
         if (containersServer != null && containersServer.Count >= image.MaxCountByServer && image.MaxCountByServer != -1)
         {
             await publisher.PublishAsync(
-                DockerRedisChannels.ContainerCreateAndRunChannelResponse,
+                DockerRedisChannels.ContainerErrorChannelResponse,
                 ErrorResponseGenerator.GetToManyServerContainersResponse(request.ConnectionId, ListenerName),
                 CommandFlags.FireAndForget
             );
             
             return;
         }
+        
+        var container = new DockerContainerModel
+        {
+            UserId = request.UserId,
+            ImageId = image.Id,
+            ContainerId = null,
+            
+            ProgramCode = request.ProgramCode,
+            
+            Status = EDockerStatus.Created,
+        };
 
-        await _dockerContainerService.ContainerCreateAsync(image, request.UserId);
+        (container.ContainerId, container.ProgramCodeFolder) = await _dockerContainerService.ContainerCreateAsync(image, request.UserId.ToString(), request.ProgramCode);
+        
+        await _dockerDbContext.DockerContainers.AddAsync(container);
+        await _dockerDbContext.SaveChangesAsync();
+        await _dockerDbContext.Entry(container).GetDatabaseValuesAsync();
 
         await publisher.PublishAsync(
             DockerRedisChannels.ContainerCreateAndRunChannelResponse,
@@ -106,7 +123,7 @@ public class ContainerCreateAndRunListener: BackgroundService
             {
                 ConnectionId = request.ConnectionId,
 
-                ContainerId = request.ConnectionId
+                ContainerId = container.Id
             }),
             CommandFlags.FireAndForget
         );

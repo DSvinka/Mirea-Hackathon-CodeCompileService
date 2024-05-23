@@ -54,7 +54,7 @@ public class ContainerStatusListener: BackgroundService
         if (request == null)
         {
             await publisher.PublishAsync(
-                DockerRedisChannels.ContainerStatusChannelResponse, 
+                DockerRedisChannels.ContainerErrorChannelResponse, 
                 ErrorResponseGenerator.GetIncorrectRequestResponse(ListenerName), 
                 CommandFlags.FireAndForget
             );
@@ -66,7 +66,7 @@ public class ContainerStatusListener: BackgroundService
         if (container == null)
         {
             await publisher.PublishAsync(
-                DockerRedisChannels.ContainerStatusChannelResponse, 
+                DockerRedisChannels.ContainerErrorChannelResponse, 
                 ErrorResponseGenerator.GetContainerNotFoundResponse(request.ConnectionId, ListenerName), 
                 CommandFlags.FireAndForget
             );
@@ -78,7 +78,7 @@ public class ContainerStatusListener: BackgroundService
         if (dbContainer == null)
         {
             await publisher.PublishAsync(
-                DockerRedisChannels.ContainerStatusChannelResponse, 
+                DockerRedisChannels.ContainerErrorChannelResponse, 
                 ErrorResponseGenerator.GetContainerNotFoundResponse(request.ConnectionId, ListenerName), 
                 CommandFlags.FireAndForget
             );
@@ -92,18 +92,22 @@ public class ContainerStatusListener: BackgroundService
             DockerRedisChannels.ContainerStatusChannelResponse,
             JsonSerializer.Serialize(new ContainerResponse
             {
+                Id = dbContainer.Id,
                 ConnectionId = request.ConnectionId,
-                
+
                 UserId = dbContainer.UserId,
                 ContainerId = dbContainer.ContainerId,
-                
+
                 Status = dbContainer.Status,
                 Logs = dbContainer.Logs,
                 
+                ProgramCode = dbContainer.ProgramCode,
+                ProgramCodeFolder = dbContainer.ProgramCodeFolder,
+
                 // TODO: Нужен фоновый процесс который будет отслеживать эти параметры (ну и логи со статусом тоже)
-                Memory = dbContainer.UsageMemory,
-                CpuShares = dbContainer.UsageCpuShares,
-                Storage = dbContainer.UsageStorage
+                UsageMemory = dbContainer.UsageMemory,
+                UsageCpu = dbContainer.UsageCpu,
+                UsageStorage = dbContainer.UsageStorage,
             })
         );
     }

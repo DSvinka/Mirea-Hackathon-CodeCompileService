@@ -55,7 +55,7 @@ public class ContainerDeleteAndStopListener: BackgroundService
         if (request == null)
         {
             await publisher.PublishAsync(
-                DockerRedisChannels.ContainerDeleteAndStopChannelResponse, 
+                DockerRedisChannels.ContainerErrorChannelResponse, 
                 ErrorResponseGenerator.GetIncorrectRequestResponse(ListenerName), 
                 CommandFlags.FireAndForget
             );
@@ -69,7 +69,7 @@ public class ContainerDeleteAndStopListener: BackgroundService
         if (container == null)
         {
             await publisher.PublishAsync(
-                DockerRedisChannels.ContainerDeleteAndStopChannelResponse, 
+                DockerRedisChannels.ContainerErrorChannelResponse, 
                 ErrorResponseGenerator.GetContainerNotFoundResponse(request.ConnectionId, ListenerName), 
                 CommandFlags.FireAndForget
             );
@@ -87,7 +87,12 @@ public class ContainerDeleteAndStopListener: BackgroundService
 
                 await publisher.PublishAsync(
                     DockerRedisChannels.ContainerDeleteAndStopChannelResponse,
-                    ErrorResponseGenerator.GetContainerNotFoundResponse(request.ConnectionId, ListenerName),
+                    JsonSerializer.Serialize(new ContainerDeleteAndStopResponse()
+                    {
+                        ConnectionId = request.ConnectionId,
+
+                        ContainerId = container.ContainerId
+                    }),
                     CommandFlags.FireAndForget
                 );
                 
@@ -107,7 +112,7 @@ public class ContainerDeleteAndStopListener: BackgroundService
                         if (!await _dockerDbContext.DockerContainers.AnyAsync(e => e.ContainerId == checkContainer.ID))
                         {
                             await _dockerContainerService.TryContainerStopAsync(container.ContainerId);
-                            await _dockerContainerService.TryContainerDeleteAsync(checkContainer.ID);
+                            await _dockerContainerService.TryContainerDeleteAsync(container);
                         }
                     }
                 }
@@ -118,7 +123,7 @@ public class ContainerDeleteAndStopListener: BackgroundService
             return;
         
         await _dockerContainerService.TryContainerStopAsync(container.ContainerId);
-        await _dockerContainerService.TryContainerDeleteAsync(container.ContainerId);
+        await _dockerContainerService.TryContainerDeleteAsync(container);
 
         _dockerDbContext.DockerContainers.Remove(container);
         await _dockerDbContext.SaveChangesAsync();
@@ -129,7 +134,7 @@ public class ContainerDeleteAndStopListener: BackgroundService
             {
                 ConnectionId = request.ConnectionId,
 
-                ContainerId = request.ConnectionId
+                ContainerId = container.ContainerId
             }),
             CommandFlags.FireAndForget
         );

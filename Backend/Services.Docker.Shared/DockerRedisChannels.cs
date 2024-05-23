@@ -15,6 +15,9 @@ public static class DockerRedisChannels
     public const string ContainerStatusChannelRequest = "docker-container-status-request";
     public const string ContainerStatusChannelResponse = "docker-container-status-response";
     
+    public const string ContainerErrorChannelResponse = "docker-image-error-response";
+    public const string ContainerMonitoringResponse = "docker-containers-monitoring-response";
+    
     
     // Images
     public const string ImageAddChannelRequest = "docker-image-add-request";
@@ -25,4 +28,6 @@ public static class DockerRedisChannels
     
     public const string ImageRemoveChannelRequest = "docker-image-remove-request";
     public const string ImageRemoveChannelResponse = "docker-image-remove-response";
+
+    public const string ImageErrorChannelResponse = "docker-image-error-response";
 }

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
-using Shared.Database.Models;
+using Shared.Utils.Database;
 
 namespace Services.Docker.Database.Models;
 

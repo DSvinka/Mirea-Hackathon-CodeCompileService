@@ -7,13 +7,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Queries\Requests\Auth\" />
-      <Folder Include="Queries\Requests\Docker\Containers\" />
-      <Folder Include="Queries\Responses\Auth\" />
+      <ProjectReference Include="..\Services.Docker.Shared\Services.Docker.Shared.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Services.Docker.Shared\Services.Docker.Shared.csproj" />
+      <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.5" />
     </ItemGroup>
 
 </Project>

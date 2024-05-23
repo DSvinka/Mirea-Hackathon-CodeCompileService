@@ -54,7 +54,7 @@ public class ImageRemoveListener: BackgroundService
         if (request == null)
         {
             await publisher.PublishAsync(
-                DockerRedisChannels.ImageRemoveChannelResponse, 
+                DockerRedisChannels.ImageErrorChannelResponse, 
                 ErrorResponseGenerator.GetIncorrectRequestResponse(ListenerName), 
                 CommandFlags.FireAndForget
             );
@@ -66,7 +66,7 @@ public class ImageRemoveListener: BackgroundService
         if (image == null)
         {
             await publisher.PublishAsync(
-                DockerRedisChannels.ImageRemoveChannelResponse, 
+                DockerRedisChannels.ImageErrorChannelResponse, 
                 ErrorResponseGenerator.GetContainerNotFoundResponse(request.ConnectionId, ListenerName), 
                 CommandFlags.FireAndForget
             );

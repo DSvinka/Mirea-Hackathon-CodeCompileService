@@ -4,15 +4,20 @@ namespace Services.Docker.Shared.Messages.Responses.Containers;
 
 public class ContainerResponse
 {
-    public required string ConnectionId;
+    public required long Id;
+    
+    public string? ConnectionId;
 
     public required long UserId;
     public required string ContainerId;
     
     public required EDockerStatus Status;
     public string? Logs;
-
-    public required int Memory;
-    public required int CpuShares;
-    public required int Storage;
+    
+    public required string ProgramCode;
+    public required string ProgramCodeFolder;
+    
+    public required int UsageMemory;
+    public required int UsageCpu;
+    public required int UsageStorage;
 }

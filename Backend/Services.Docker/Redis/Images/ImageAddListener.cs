@@ -55,7 +55,7 @@ public class ImageAddListener: BackgroundService
         if (request == null)
         {
             await publisher.PublishAsync(
-                DockerRedisChannels.ImageAddChannelResponse, 
+                DockerRedisChannels.ImageErrorChannelResponse, 
                 ErrorResponseGenerator.GetIncorrectRequestResponse(ListenerName), 
                 CommandFlags.FireAndForget
             );
@@ -66,7 +66,7 @@ public class ImageAddListener: BackgroundService
         if (await _dockerDbContext.DockerImages.AnyAsync(e => e.DockerImage == request.Image && e.DockerImageTag == request.ImageTag))
         {
             await publisher.PublishAsync(
-                DockerRedisChannels.ImageAddChannelResponse, 
+                DockerRedisChannels.ImageErrorChannelResponse, 
                 ErrorResponseGenerator.GetImageAlreadyExist(request.ConnectionId, ListenerName), 
                 CommandFlags.FireAndForget
             );
@@ -87,8 +87,8 @@ public class ImageAddListener: BackgroundService
             CodeInitCommand = request.CodeInitCommand,
             CodeStartCommand = request.CodeStartCommand,
 
-            MaxMemory = request.Memory,
-            MaxCpuShares = request.CpuShares,
+            MaxMemory = request.MaxMemory,
+            MaxCpuShares = request.MaxCpuShares,
             MaxStorage = request.MaxStorage,
 
             MaxCountByUser = request.MaxCountByUser,

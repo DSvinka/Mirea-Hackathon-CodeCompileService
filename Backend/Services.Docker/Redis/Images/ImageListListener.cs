@@ -54,7 +54,7 @@ public class ImageListListener: BackgroundService
         if (request == null)
         {
             await publisher.PublishAsync(
-                DockerRedisChannels.ImageListChannelResponse, 
+                DockerRedisChannels.ImageErrorChannelResponse, 
                 ErrorResponseGenerator.GetIncorrectRequestResponse(ListenerName), 
                 CommandFlags.FireAndForget
             );
@@ -66,7 +66,7 @@ public class ImageListListener: BackgroundService
         if (images.Count == 0)
         {
             await publisher.PublishAsync(
-                DockerRedisChannels.ImageListChannelResponse,
+                DockerRedisChannels.ImageErrorChannelResponse,
                 ErrorResponseGenerator.GetImageNotFoundResponse(request.ConnectionId, ListenerName),
                 CommandFlags.FireAndForget
             );
@@ -78,24 +78,27 @@ public class ImageListListener: BackgroundService
         imageResponses.AddRange(
             images.Select(image => new ImageResponse
             {
+                Id = image.Id,
+                ConnectionId = request.ConnectionId,
+                
                 DisplayName = image.DisplayName,
                 Description = image.Description,
-                
+
                 DockerImage = image.DockerImage,
                 DockerImageTag = image.DockerImageTag,
-                
+
                 CodeFileExtension = image.CodeFileExtension,
                 CodeEditorLang = image.CodeEditorLang,
-                
+
                 CodeInitCommand = image.CodeInitCommand,
                 CodeStartCommand = image.CodeStartCommand,
-                
+
                 MaxMemory = image.MaxMemory,
                 MaxCpuShares = image.MaxCpuShares,
                 MaxStorage = image.MaxStorage,
-                
+
                 MaxCountByUser = image.MaxCountByUser,
-                MaxCountByServer = image.MaxCountByServer
+                MaxCountByServer = image.MaxCountByServer,
             })
         );
 

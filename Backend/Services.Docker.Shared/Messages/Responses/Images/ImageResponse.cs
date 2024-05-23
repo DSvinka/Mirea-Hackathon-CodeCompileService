@@ -2,6 +2,7 @@
 
 public class ImageResponse
 {
+    public required long Id;
     public required string ConnectionId;
     
     public required string DisplayName;

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="43e15d7b-0dd4-4070-9fb0-b49d19564556" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Backend/API.Shared/AuthHubMethods.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/API.Shared/Models/SettingsModel.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/API.Shared/Queries/Requests/Docker/Containers/DockerContainerCreateRequest.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/API.Shared/Queries/Requests/Docker/Containers/DockerContainerDeleteRequest.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/API.Shared/Queries/Requests/Docker/Containers/DockerContainerGetListRequest.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/API.Shared/Queries/Requests/Docker/Images/DockerImageAddRequest.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/API.Shared/Queries/Requests/Docker/Images/DockerImageGetAllRequest.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/API.Shared/Queries/Requests/Docker/Images/DockerImageRemoveRequest.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/API.Shared/Queries/Responses/Docker/Containers/DockerContainerCreateResponse.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/API.Shared/Queries/Responses/Docker/Containers/DockerContainerDeleteResponse.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/API.Shared/Queries/Responses/Docker/Images/DockerImageAddResponse.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/API.Shared/Queries/Responses/Docker/Images/DockerImageRemoveResponse.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/API.Shared/Queries/Responses/ErrorResponse.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/API/Hubs/ContainerDockerHub.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/API/Hubs/ImageDockerHub.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/Services.Docker/Workers/ContainerMonitoringWorker.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/API.Shared/API.Shared.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/API.Shared/API.Shared.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/API.Shared/DockerHubMethods.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/API.Shared/DockerHubMethods.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/API.Shared/Queries/Requests/Docker/Images/DockerImagePostRequest.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/API.Shared/Queries/Responses/Docker/Containers/ContainerAdminResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/API.Shared/Queries/Responses/Docker/Containers/DockerContainerAdminResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/API.Shared/Queries/Responses/Docker/Containers/ContainerUserResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/API.Shared/Queries/Responses/Docker/Containers/DockerContainerUserResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/API.Shared/Queries/Responses/Docker/Images/ImageAdminResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/API.Shared/Queries/Responses/Docker/Images/DockerImageAdminResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/API.Shared/Queries/Responses/Docker/Images/ImageUserResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/API.Shared/Queries/Responses/Docker/Images/DockerImageUserResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/API/API.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/API/API.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/API/Controllers/AuthController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/API/Controllers/AuthController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/API/Controllers/DockerContainerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/API/Controllers/DockerContainerController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/API/Controllers/DockerImageController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/API/Controllers/DockerImageController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/API/Hubs/DockerHub.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/API/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/API/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Backend.sln" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/Backend.sln" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Services.Auth.Database/AuthDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/API.Database/AuthDbContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Services.Auth.Database/DatabaseExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/API.Database/DatabaseExtensions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Services.Auth.Database/Models/UserModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/API.Database/Models/UserModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Services.Auth.Database/Services.Auth.Database.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/API.Database/API.Database.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Services.Auth.Shared/AuthRedisChannels.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Services.Auth.Shared/Messages/Requests/LoginRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/API.Shared/Queries/Requests/Auth/LoginRequest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Services.Auth.Shared/Messages/Requests/ProfileRequest.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Services.Auth.Shared/Messages/Requests/RefreshRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/API.Shared/Queries/Requests/Auth/RefreshRequest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Services.Auth.Shared/Messages/Requests/RegisterRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/API.Shared/Queries/Requests/Auth/RegisterRequest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Services.Auth.Shared/Messages/Requests/VerifyRequest.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Services.Auth.Shared/Messages/Responses/AuthResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/API.Shared/Queries/Responses/Auth/AuthResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Services.Auth.Shared/Messages/Responses/ProfileResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/API.Shared/Queries/Responses/Auth/ProfileResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Services.Auth.Shared/Messages/Responses/VerifyResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/API.Shared/Queries/Responses/Auth/VerifyResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Services.Auth.Shared/Models/SettingsModel.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Services.Auth.Shared/Services.Auth.Shared.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/API.Auth/API.Auth.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Services.Auth/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Services.Auth/Program.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Services.Auth/Properties/launchSettings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Services.Auth/Redis/LoginListener.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Services.Auth/Redis/ProfileListener.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Services.Auth/Redis/RefreshListener.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Services.Auth/Redis/RegisterListener.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Services.Auth/Redis/VerifyListener.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Services.Auth/Services.Auth.csproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Services.Auth/Services/HashService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/API.Auth/Services/HashService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Services.Auth/Services/JwtService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/API.Auth/Services/JwtService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Services.Auth/Utils/ErrorCodeNames.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/API/Utils/ErrorCodeNames.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Services.Auth/Utils/ErrorResponseGenerator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/API/Utils/ErrorResponseGenerator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Services.Auth/appsettings.Development.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Services.Auth/appsettings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Services.Docker.Database/Models/DockerContainerModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/Services.Docker.Database/Models/DockerContainerModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Services.Docker.Database/Models/DockerImageModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/Services.Docker.Database/Models/DockerImageModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Services.Docker.Database/Services.Docker.Database.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/Services.Docker.Database/Services.Docker.Database.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Services.Docker.Shared/DockerRedisChannels.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/Services.Docker.Shared/DockerRedisChannels.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Services.Docker.Shared/Messages/Requests/Containers/ContainerCreateAndRunRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/Services.Docker.Shared/Messages/Requests/Containers/ContainerCreateAndRunRequest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Services.Docker.Shared/Messages/Requests/Images/ImageAddRequest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/Services.Docker.Shared/Messages/Requests/Images/ImageAddRequest.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Services.Docker.Shared/Messages/Responses/Containers/ContainerCreateAndRunResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/Services.Docker.Shared/Messages/Responses/Containers/ContainerCreateAndRunResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Services.Docker.Shared/Messages/Responses/Containers/ContainerResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/Services.Docker.Shared/Messages/Responses/Containers/ContainerResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Services.Docker.Shared/Messages/Responses/Images/ImageResponse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/Services.Docker.Shared/Messages/Responses/Images/ImageResponse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Services.Docker/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/Services.Docker/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Services.Docker/Redis/Containers/ContainerCreateAndRunListener.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/Services.Docker/Redis/Containers/ContainerCreateAndRunListener.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Services.Docker/Redis/Containers/ContainerDeleteAndStopListener.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/Services.Docker/Redis/Containers/ContainerDeleteAndStopListener.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Services.Docker/Redis/Containers/ContainerListListener.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/Services.Docker/Redis/Containers/ContainerListListener.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Services.Docker/Redis/Containers/ContainerStatusListener.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/Services.Docker/Redis/Containers/ContainerStatusListener.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Services.Docker/Redis/Images/ImageAddListener.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/Services.Docker/Redis/Images/ImageAddListener.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Services.Docker/Redis/Images/ImageListListener.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/Services.Docker/Redis/Images/ImageListListener.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Services.Docker/Redis/Images/ImageRemoveListener.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/Services.Docker/Redis/Images/ImageRemoveListener.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Services.Docker/Services/DockerContainerService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/Services.Docker/Services/DockerContainerService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Shared.Database/Enums/EContainerStatus.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/Shared.Utils/Redis/Enums/EContainerStatus.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Shared.Database/Models/BaseModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/Shared.Utils/Database/BaseModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Shared.Database/Models/SettingsDockerModel.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Shared.Database/Models/UserModel.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/Shared.Database/Shared.Database.csproj" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 3
+}]]></component>
+  <component name="ProjectId" id="2gqCVftq1PWt1Kbna9acYKjtiMF" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-1d06a55b98c1-91d5c284f522-JavaScript-WS-241.15989.105" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="43e15d7b-0dd4-4070-9fb0-b49d19564556" name="Changes" comment="" />
+      <created>1716415746519</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1716415746519</updated>
+      <workItem from="1716415749104" duration="65000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

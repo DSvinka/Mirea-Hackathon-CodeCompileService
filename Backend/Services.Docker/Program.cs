@@ -2,6 +2,7 @@ using Services.Docker.Database;
 using Services.Docker.Database.Models;
 using Services.Docker.Redis.Containers;
 using Services.Docker.Redis.Images;
+using Services.Docker.Services;
 using Services.Docker.Shared.Models;
 using Shared.Utils.Redis.Services;
 
@@ -23,11 +24,11 @@ var settings = new SettingsModel
 
 builder.Services.AddSingleton(settings);
 
-builder.Services.AddSingleton<DockerContainerModel>();
-builder.Services.AddSingleton<DockerImageModel>();
-
 var redisService = new RedisService(settings.RedisHost, settings.RedisPassword);
 builder.Services.AddSingleton(redisService);
+
+builder.Services.AddSingleton<DockerContainerService>();
+builder.Services.AddSingleton<DockerImageService>();
 
 builder.Services.UseDatabase(settings);
 

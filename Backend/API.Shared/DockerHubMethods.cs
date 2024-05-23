@@ -2,8 +2,9 @@
 
 public static class DockerHubMethods
 {
-    public const string DockerContainersUpdate = "docker-containers-update";
-    public const string DockerImagesUpdate = "docker-images-update";
+    public const string ContainersUpdate = "docker-containers-update";
+    public const string ImagesUpdate = "docker-images-update";
     
-    public const string DockerActionResponse = "docker-action-response";
+    public const string Success = "docker-success";
+    public const string Error = "docker-error";
 }

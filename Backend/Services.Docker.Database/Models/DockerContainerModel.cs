@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 using Services.Docker.Shared.Enums;
-using Shared.Database.Models;
+using Shared.Utils.Database;
 
 namespace Services.Docker.Database.Models;
 
@@ -15,8 +15,12 @@ public class DockerContainerModel: BaseModel
     public required EDockerStatus Status { get; set; }
     [MaxLength(2048)] public string? Logs { get; set; }
     
+    
+    [MaxLength(32)] public string ProgramCodeFolder { get; set; }
+    [MaxLength(10240)] public string ProgramCode { get; set; }
+    
     public int UsageMemory { get; set; }
-    public int UsageCpuShares { get; set; }
+    public int UsageCpu { get; set; }
     public int UsageStorage { get; set; }
 
 
@@ -56,12 +60,18 @@ public class DockerContainerModel: BaseModel
         model.Property(b => b.Logs)
             .IsRequired(false)
             .HasDefaultValue("");
+
+
+        model.Property(b => b.ProgramCodeFolder)
+            .IsRequired();
+        model.Property(b => b.ProgramCode)
+            .IsRequired();
         
         
         model.Property(b => b.UsageMemory)
             .IsRequired();
         
-        model.Property(b => b.UsageCpuShares)
+        model.Property(b => b.UsageCpu)
             .IsRequired();
         
         model.Property(b => b.UsageStorage)

@@ -5,5 +5,7 @@ public class ContainerCreateAndRunRequest
     public required string ConnectionId;
 
     public required long ImageId;
-    public required string UserId;
+    public required long UserId;
+    
+    public required string ProgramCode;
 }
