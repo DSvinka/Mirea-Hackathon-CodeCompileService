@@ -14,7 +14,7 @@ public class DockerContainerUserResponse
     
     public required string ProgramCode;
 
-    public required int Memory;
-    public required int CpuShares;
-    public required int Storage;
+    public required int UsageMemory;
+    public required int UsageCpu;
+    public required int UsageStorage;
 }

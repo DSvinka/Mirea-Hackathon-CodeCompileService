@@ -1,6 +1,7 @@
 ﻿namespace API.Shared.Queries.Responses.Docker.Containers;
 
-public class DockerContainerDeleteResponse
+public class DockerContainerActionResponse
 {
+    public required string Action;
     public required long ContainerId;
 }

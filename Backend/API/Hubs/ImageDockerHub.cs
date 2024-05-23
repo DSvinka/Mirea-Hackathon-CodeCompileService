@@ -101,8 +101,9 @@ public class ImageDockerHub: Hub
                 var user = await _jwtService.GetUserAsync(response.ConnectionId);
                 
                 await Clients.Client(response.ConnectionId).SendAsync(DockerHubMethods.Success, 
-                    JsonSerializer.Serialize(new DockerImageAddResponse
+                    JsonSerializer.Serialize(new DockerImageActionResponse()
                     {
+                        Action = "create",
                         ImageId = response.ImageId
                     })
                 );
@@ -119,8 +120,9 @@ public class ImageDockerHub: Hub
                 var user = await _jwtService.GetUserAsync(response.ConnectionId);
                 
                 await Clients.Client(response.ConnectionId).SendAsync(DockerHubMethods.Success, 
-                    JsonSerializer.Serialize(new DockerImageRemoveResponse()
+                    JsonSerializer.Serialize(new DockerImageActionResponse()
                     {
+                        Action = "delete",
                         ImageId = response.ImageId
                     })
                 );

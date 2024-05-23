@@ -48,9 +48,9 @@ public class ContainerDockerHub: Hub
 
                             Status = container.Status,
 
-                            Memory = container.UsageMemory,
-                            CpuShares = container.UsageCpu,
-                            Storage = container.UsageStorage,
+                            UsageMemory = container.UsageMemory,
+                            UsageCpu = container.UsageCpu,
+                            UsageStorage = container.UsageStorage,
                             
                             ProgramCode = container.ProgramCode
                         })
@@ -71,9 +71,9 @@ public class ContainerDockerHub: Hub
 
                             Status = container.Status,
 
-                            Memory = container.UsageMemory,
-                            CpuShares = container.UsageCpu,
-                            Storage = container.UsageStorage,
+                            UsageMemory = container.UsageMemory,
+                            UsageCpu = container.UsageCpu,
+                            UsageStorage = container.UsageStorage,
                             
                             ProgramCode = container.ProgramCode,
                             ProgramCodeFolder = container.ProgramCodeFolder
@@ -106,9 +106,9 @@ public class ContainerDockerHub: Hub
                         Status = response.Status,
                         Logs = response.Logs,
 
-                        Memory = response.UsageMemory,
-                        CpuShares = response.UsageCpu,
-                        Storage = response.UsageStorage,
+                        UsageMemory = response.UsageMemory,
+                        UsageCpu = response.UsageCpu,
+                        UsageStorage = response.UsageStorage,
                         
                         ProgramCode = response.ProgramCode
                     };
@@ -127,9 +127,9 @@ public class ContainerDockerHub: Hub
                         Status = response.Status,
                         Logs = response.Logs,
 
-                        Memory = response.UsageMemory,
-                        CpuShares = response.UsageCpu,
-                        Storage = response.UsageStorage,
+                        UsageMemory = response.UsageMemory,
+                        UsageCpu = response.UsageCpu,
+                        UsageStorage = response.UsageStorage,
                         
                         ProgramCode = response.ProgramCode,
                         ProgramCodeFolder = response.ProgramCodeFolder
@@ -150,8 +150,9 @@ public class ContainerDockerHub: Hub
                 var user = await _jwtService.GetUserAsync(response.ConnectionId);
                 
                 await Clients.Client(response.ConnectionId).SendAsync(DockerHubMethods.Success, 
-                    JsonSerializer.Serialize(new DockerContainerCreateResponse
+                    JsonSerializer.Serialize(new DockerContainerActionResponse()
                     {
+                        Action = "create",
                         ContainerId = response.ContainerId
                     })
                 );
@@ -164,12 +165,13 @@ public class ContainerDockerHub: Hub
             DockerRedisChannels.ContainerDeleteAndStopChannelResponse, 
             async (channel, value) =>
             {
-                var response = JsonSerializer.Deserialize<ContainerCreateAndRunResponse>(value);
+                var response = JsonSerializer.Deserialize<ContainerDeleteAndStopResponse>(value);
                 var user = await _jwtService.GetUserAsync(response.ConnectionId);
                 
                 await Clients.Client(response.ConnectionId).SendAsync(DockerHubMethods.Success, 
-                    JsonSerializer.Serialize(new DockerContainerDeleteResponse()
+                    JsonSerializer.Serialize(new DockerContainerActionResponse()
                     {
+                        Action = "delete",
                         ContainerId = response.ContainerId
                     })
                 );

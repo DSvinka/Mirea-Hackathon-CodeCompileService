@@ -4,5 +4,5 @@ public class ContainerDeleteAndStopResponse
 {
     public required string ConnectionId;
 
-    public required string ContainerId;
+    public required long ContainerId;
 }

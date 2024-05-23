@@ -134,7 +134,7 @@ public class ContainerDeleteAndStopListener: BackgroundService
             {
                 ConnectionId = request.ConnectionId,
 
-                ContainerId = container.ContainerId
+                ContainerId = container.Id
             }),
             CommandFlags.FireAndForget
         );

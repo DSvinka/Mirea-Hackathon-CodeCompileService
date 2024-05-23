@@ -109,7 +109,7 @@ public class DockerImageController: ControllerBase
     [HttpPost("get/all")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-    public async Task<IActionResult> GetAll([FromBody] DockerImageGetAllRequest request)
+    public async Task<IActionResult> GetAll([FromBody] DockerImageGetListRequest request)
     {
         var user = await _jwtService.GetUserAsync(User);
         if (user == null)
