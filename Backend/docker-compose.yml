@@ -56,7 +56,7 @@
       - postgres
       - redis
       
-    privileged: true
+    privileged: true;
     environment:
       POSTGRES_HOST: postgres
       POSTGRES_PORT: 5432
