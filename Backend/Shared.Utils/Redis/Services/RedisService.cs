@@ -11,7 +11,8 @@ public class RedisService
     {
         _connection = ConnectionMultiplexer.Connect(host);
         var database = _connection.GetDatabase();
-        database.Execute("AUTH", password);
+        if (password.Length != 0)
+            database.Execute("AUTH", password);
     }
     
     public ConnectionMultiplexer Connection => _connection;
