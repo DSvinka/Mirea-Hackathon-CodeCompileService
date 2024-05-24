@@ -7,5 +7,7 @@
 </template>
 
 <script lang="ts" setup>
-  //
+import {setupSignalR} from "./api/signalr/docker-containers-signalr"
+
+setupSignalR()
 </script>
