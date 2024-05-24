@@ -128,7 +128,7 @@ networks:
     driver: bridge
 
 volumes:
-  postgres:
+  db:
     driver: local
   pgadmin:
     driver: local
