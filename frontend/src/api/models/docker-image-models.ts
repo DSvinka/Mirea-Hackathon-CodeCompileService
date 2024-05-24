@@ -1,14 +1,14 @@
-interface GetListDockerImageRequest {
+export interface GetListDockerImageRequest {
   connectionId: string
 }
 
 
-interface DockerImageActionModel {
+export interface DockerImageActionModel {
   action: string
   imageId: number
 }
 
-interface DockerImageModel {
+export interface DockerImageModel {
   id: string;
 
   displayName: string;

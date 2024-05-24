@@ -6,6 +6,9 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["Services.Docker/Services.Docker.csproj", "Services.Docker/"]
+COPY ["Services.Docker.Database/Services.Docker.Database.csproj", "Services.Docker.Database/"]
+COPY ["Services.Docker.Shared/Services.Docker.Shared.csproj", "Services.Docker.Shared/"]
+COPY ["Shared.Utils/Shared.Utils.csproj", "Shared.Utils.Shared/"]
 RUN dotnet restore "Services.Docker/Services.Docker.csproj"
 COPY . .
 WORKDIR "/src/Services.Docker"

@@ -3,6 +3,7 @@ import { defineStore } from 'pinia'
 import {Docker, getAuthHeader,} from "../api"
 import {ErrorModel} from "../api/models/error-models";
 import {DockerContainerModel, GetListDockerContainerRequest} from "../api/models/docker-container-models";
+import {DockerImageModel, GetListDockerImageRequest} from "../api/models/docker-image-models";
 
 interface DockerState {
   containers: DockerContainerModel[]
