@@ -27,7 +27,7 @@ var settings = new SettingsModel
     PostgresPassword = Environment.GetEnvironmentVariable("POSTGRES_PASSWORD")!,
     
     RedisHost = Environment.GetEnvironmentVariable("REDIS_HOST")!,
-    RedisPassword = Environment.GetEnvironmentVariable("REDIS_PASSWORD")!,
+    RedisPassword = Environment.GetEnvironmentVariable("REDIS_PASSWORD"),
 };
 
 builder.Services.AddSingleton(settings);

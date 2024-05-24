@@ -7,11 +7,11 @@ public class RedisService
     private readonly ConnectionMultiplexer _connection;
     
     
-    public RedisService(string host, string password)
+    public RedisService(string host, string? password)
     {
         _connection = ConnectionMultiplexer.Connect(host);
         var database = _connection.GetDatabase();
-        if (password.Length != 0)
+        if (password == null || password.Length != 0)
             database.Execute("AUTH", password);
     }
     
